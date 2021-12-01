@@ -1,6 +1,6 @@
 public with sharing class AdventOfCode_modules {
 
-    public static integer exercise01(integer part){
+    public static integer exercise01_raw(integer part){
     	List<Integer> depthList = getExerciseList_exercise01();
         if(part == 1){
         	Integer increasedCount = 0;
@@ -28,7 +28,28 @@ public with sharing class AdventOfCode_modules {
         
     }
     
-    private List<Integer> getExerciseList_exercise01(){
+    public static integer exercise01_refactored(integer window){
+    	Integer increasedCount = 0;
+    	Integer summedValueA;
+    	Integer summedValueB;
+        
+        List<Integer> depthList = getExerciseList_exercise01();
+        for(Integer i = 0; i < depthList.size(); i++){
+        	if(i < depthList.size() - window){
+                summedValueA = summedValueB = 0;
+                for(Integer j = 0; j < window; j++){
+                    summedValueA += depthList[i + j];
+                    summedValueB += depthlist[i+1 + j];
+                }
+                if(summedValueB > summedValueA){
+                	increasedCount++;
+                }
+            }
+       	} 
+        return increasedCount;
+    }
+    
+    private static List<Integer> getExerciseList_exercise01(){
         List<Integer> exerciseList = new List<Integer>{
             143,147,150,166,180,187,188,185,199,198,199,197,218,221,238,239,233,234,
             217,212,215,216,215,217,220,241,245,232,230,234,206,251,272,273,278,279,
